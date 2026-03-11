@@ -34,48 +34,59 @@
 // }
 
 pipeline {
-agent any
+    agent any
 
+    stages {
 
-stages {
-
-    stage('Checkout Code') {
-        steps {
-            echo 'Checking out source code from repository'
-            checkout scm
+        stage('Checkout Code') {
+            steps {
+                echo 'Checking out source code from repository'
+                checkout scm
+            }
         }
-    }
 
-    stage('Build Docker Image') {
-        steps {
-            echo 'Building Docker image'
-            sh 'docker build -t devops-node-app .'
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building Docker image'
+                sh 'docker build -t devops-node-app .'
+            }
         }
-    }
 
-    stage('Security Scan - Docker Image') {
-        steps {
-            echo 'Scanning Docker image using Trivy'
-            sh 'trivy image devops-node-app || true'
+        stage('Security Scan - Docker Image') {
+            steps {
+                echo 'Scanning Docker image using Trivy'
+                sh 'trivy image devops-node-app || true'
+            }
         }
-    }
 
-    stage('Terraform Validate') {
-        steps {
-            echo 'Initializing and validating Terraform'
-            sh 'cd terraform && terraform init && terraform validate'
+        stage('Terraform Validate') {
+            steps {
+                echo 'Initializing and validating Terraform'
+                sh 'cd terraform && terraform init && terraform validate'
+            }
         }
-    }
 
-    stage('Terraform Security Scan') {
-        steps {
-            echo 'Running Trivy Terraform security scan'
-            sh 'trivy config terraform/'
+        stage('Terraform Security Scan') {
+            steps {
+                echo 'Running Trivy Terraform security scan'
+                sh 'trivy config terraform/'
+            }
         }
+
+        stage('Terraform Plan') {
+            steps {
+                echo 'Running Terraform Plan'
+                sh 'cd terraform && terraform plan'
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                echo 'Deploying Infrastructure to AWS'
+                sh 'cd terraform && terraform apply -auto-approve'
+            }
+        }
+
     }
 
 }
-
-
-}
-
