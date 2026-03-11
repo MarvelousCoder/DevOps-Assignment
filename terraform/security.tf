@@ -3,15 +3,15 @@ resource "aws_security_group" "devops_sg" {
   description = "Security group for DevOps assignment"
 
   ingress {
-    description = "Allow SSH from anywhere (intentional vulnerability)"
+    description = "Allow SSH from my IP"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["103.49.254.27/32"]
   }
 
   ingress {
-    description = "Allow Node App"
+    description = "Allow Node App access"
     from_port   = 3000
     to_port     = 3000
     protocol    = "tcp"
@@ -19,9 +19,18 @@ resource "aws_security_group" "devops_sg" {
   }
 
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description = "Allow HTTP outbound"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    description = "Allow HTTPS outbound"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
