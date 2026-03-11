@@ -75,15 +75,17 @@ pipeline {
 
         stage('Terraform Plan') {
             steps {
-                echo 'Running Terraform Plan'
-                sh 'cd terraform && terraform plan'
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+                    sh 'cd terraform && terraform plan'
+                }
             }
         }
 
         stage('Terraform Apply') {
             steps {
-                echo 'Deploying Infrastructure to AWS'
-                sh 'cd terraform && terraform apply -auto-approve'
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+                    sh 'cd terraform && terraform apply -auto-approve'
+                }
             }
         }
 
