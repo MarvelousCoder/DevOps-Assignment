@@ -20,6 +20,9 @@ terraform/*.tfstate.backup
 # Terraform plan files
 *.tfplan
 
+# Keys
+*.pem
+
 # IDE
 .vscode/
 .idea/
