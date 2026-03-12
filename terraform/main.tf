@@ -20,7 +20,32 @@ resource "aws_instance" "devops_ec2" {
     encrypted = true
   }
 
+  user_data = <<-EOF
+              #!/bin/bash
+              apt update -y
+              apt install docker.io git -y
+
+              systemctl start docker
+              systemctl enable docker
+
+              usermod -aG docker ubuntu
+
+              cd /home/ubuntu
+
+              git clone https://github.com/MarvelousCoder/DevOps-Assignment.git
+
+              cd DevOps-Assignment
+
+              docker build -t devops-node-app .
+
+              docker run -d -p 3000:3000 devops-node-app
+              EOF
+
   tags = {
     Name = "DevOps-Assignment-EC2"
   }
+}
+
+output "application_url" {
+  value = "http://${aws_instance.devops_ec2.public_ip}:3000"
 }
