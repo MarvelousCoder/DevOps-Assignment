@@ -62,58 +62,65 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<title>DevOps Dashboard</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>DevOps Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="container">
+    <div class="dashboard">
 
-<header>
-<h1>🚀 DevOps Deployment Dashboard</h1>
-<p>Node.js Application | Docker | Jenkins | Terraform | AWS</p>
-</header>
+        <header>
+            <h1>🚀 DevOps Deployment Dashboard</h1>
+            <p>Node Application deployed using Docker, Jenkins & Terraform</p>
+        </header>
 
-<section class="card">
+        <div class="grid">
 
-<h2>Application Endpoints</h2>
+            <div class="card">
+                <h3>Application Health</h3>
+                <p class="status">🟢 Running</p>
+                <a href="/health" target="_blank">Check Endpoint</a>
+            </div>
 
-<div class="endpoint">
-<span>/health</span>
-<a href="/health" target="_blank">Check Health</a>
-</div>
+            <div class="card">
+                <h3>Application Version</h3>
+                <p class="status">v1.0.0</p>
+                <a href="/version" target="_blank">View Version</a>
+            </div>
 
-<div class="endpoint">
-<span>/version</span>
-<a href="/version" target="_blank">Check Version</a>
-</div>
+            <div class="card">
+                <h3>Pipeline</h3>
+                <p>CI/CD with Jenkins</p>
+                <p class="status">✔ Successful</p>
+            </div>
 
-</section>
+        </div>
 
-<section class="card">
+        <section class="tech-section">
 
-<h2>Technology Stack</h2>
+            <h2>Technology Stack</h2>
 
-<div class="tech-grid">
+            <div class="tech-grid">
 
-<div class="tech">Node.js</div>
-<div class="tech">Docker</div>
-<div class="tech">Jenkins</div>
-<div class="tech">Terraform</div>
-<div class="tech">AWS EC2</div>
-<div class="tech">Trivy Security Scan</div>
+                <div class="tech">Node.js</div>
+                <div class="tech">Docker</div>
+                <div class="tech">Jenkins</div>
+                <div class="tech">Terraform</div>
+                <div class="tech">AWS EC2</div>
+                <div class="tech">Trivy Security</div>
 
-</div>
+            </div>
 
-</section>
+        </section>
 
-<footer>
-<p>DevOps Assignment Project</p>
-</footer>
+        <footer>
+            DevOps Assignment • CI/CD Infrastructure
+        </footer>
 
-</div>
+    </div>
 
 </body>
+
 </html>

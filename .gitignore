@@ -29,3 +29,6 @@ terraform/*.tfstate.backup
 
 # Docker
 *.pid
+
+#Video
+DevOps Assignment.mp4
